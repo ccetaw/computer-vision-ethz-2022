@@ -54,8 +54,8 @@ def main_matching():
 
 def main():
     main_detection()
-    pdb.set_trace() # Enter c to continue to matching, q to exit.
-    main_matching()
+    # pdb.set_trace() # Enter c to continue to matching, q to exit.
+    # main_matching()
 
 if __name__ == "__main__":
     main()
