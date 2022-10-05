@@ -3,8 +3,13 @@ import numpy as np
 def filter_keypoints(img, keypoints, patch_size = 9):
     # TODO: Filter out keypoints that are too close to the edges
     # Filter out keypoints that are in 5% margin
-    margin = int(0.05 * np.min(img.shape))
-    keypoints_f = keypoints(np.any(keypoints>margin, axis=1))
+    edge_rate = 0.05
+    margin_left = int(edge_rate * img.shape[1])
+    margin_right = int((1-edge_rate) * img.shape[1])
+    margin_top = int(edge_rate * img.shape[0])
+    margin_bottom = int((1-edge_rate) * img.shape[0])
+    in_margin = (margin_left < keypoints[:, 0]) * (keypoints[:, 0] < margin_right) * (margin_top < keypoints[:, 1]) * (keypoints[:, 1] < margin_bottom)
+    keypoints_f = keypoints[in_margin]
     return keypoints_f
 
 # The implementation of the patch extraction is already provided here

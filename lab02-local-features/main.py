@@ -10,7 +10,7 @@ from functions.vis_utils import plot_image_with_keypoints, plot_image_pair_with_
 # constants
 HARRIS_SIGMA = 1.0
 HARRIS_K = 0.05
-HARRIS_THRESH = 1e-5
+HARRIS_THRESH = 5*1e-5
 MATCHING_RATIO_TEST_THRESHOLD = 0.5
 
 def main_detection():
@@ -44,6 +44,11 @@ def main_matching():
     desc1 = extract_patches(img1, corners1, patch_size=9)
     corners2 = filter_keypoints(img2, corners2, patch_size=9)
     desc2 = extract_patches(img2, corners2, patch_size=9)
+
+    # Debug
+    plot_image_with_keypoints(os.path.basename(IMG_NAME1[:-4]) + "_harris_f.png", img1, corners1)
+    plot_image_with_keypoints(os.path.basename(IMG_NAME2[:-4]) + "_harris_f.png", img2, corners2)
+
     # Matching
     matches_ow = match_descriptors(desc1, desc2, "one_way")
     plot_image_pair_with_matches("match_ow.png", img1, corners1, img2, corners2, matches_ow)
@@ -54,8 +59,8 @@ def main_matching():
 
 def main():
     main_detection()
-    # pdb.set_trace() # Enter c to continue to matching, q to exit.
-    # main_matching()
+    pdb.set_trace() # Enter c to continue to matching, q to exit.
+    main_matching()
 
 if __name__ == "__main__":
     main()
