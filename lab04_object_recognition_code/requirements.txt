@@ -1,0 +1,9 @@
+numpy
+sklearn
+tensorboard
+tensorboardX
+torch
+torchvision
+tqdm
+opencv-python
+glob
