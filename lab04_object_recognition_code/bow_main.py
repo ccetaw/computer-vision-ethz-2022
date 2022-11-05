@@ -43,16 +43,25 @@ def grid_points(img, nPointsX, nPointsY, border):
     """
     vPoints = None  # numpy array, [nPointsX*nPointsY, 2]
 
-    # todo
-    ...
+    h = img.shape[0]+1
+    w = img.shape[1]+1
+    # Note that gird is not on pixel. (i,j) grid point is the bottom-right corner of (i,j) cell
+    index_h = np.linspace(border, h-border, nPointsY, dtype=int)
+    index_w = np.linspace(border, w-border, nPointsX, dtype=int)
 
+    vy, vx = np.meshgrid(index_h, index_w)
+    vx = vx.flatten()
+    vy = vy.flatten()
+    vPoints = np.array([vx, vy]).transpose()
 
     return vPoints
 
 
 
 def descriptors_hog(img, vPoints, cellWidth, cellHeight):
+    # HOG created following the method in https://courses.cs.duke.edu/compsci527/fall15/notes/hog.pdf
     nBins = 8
+    bin_len = 180.0/nBins
     w = cellWidth
     h = cellHeight
 
@@ -73,11 +82,24 @@ def descriptors_hog(img, vPoints, cellWidth, cellHeight):
                 start_x = center_x + (cell_x) * w
                 end_x = center_x + (cell_x + 1) * w
 
+                cell_grad_x = grad_x[start_y:end_y, start_x:end_x]
+                cell_grad_y = grad_y[start_y:end_y, start_x:end_x]
+
                 # todo
                 # compute the angles
+                # cartToPolar assumes float input(CV_32F)
+                mags, angles = cv2.cartToPolar(np.array(cell_grad_x, dtype=float), np.array(cell_grad_y, dtype=float), angleInDegrees=True)
                 # compute the histogram
-                ...
+                j = np.int16(np.floor(angles / bin_len - 0.5))
+                v_j = mags * (((j+1) + 0.5) - angles/bin_len) 
+                v_j1 = mags * (angles/bin_len - (j+0.5))
+                j[j==-1] = nBins-1
+                j[j==nBins] = 0
+                for bin in range(nBins):
+                    desc.append(np.sum(v_j[j == bin]) + np.sum(v_j1[(j+1)%nBins == bin]))
 
+        desc = np.asarray(desc) 
+        desc /= np.linalg.norm(desc)
         descriptors.append(desc)
 
     descriptors = np.asarray(descriptors) # [nPointsX*nPointsY, 128], descriptor for the current image (100 grid points)
@@ -114,7 +136,9 @@ def create_codebook(nameDirPos, nameDirNeg, k, numiter):
 
         # Collect local feature points for each image, and compute a descriptor for each local feature point
         # todo
-        ...
+        vPoints = grid_points(img, nPointsX, nPointsY, border)
+        descriptors = descriptors_hog(img, vPoints, cellWidth, cellHeight)
+        vFeatures.append(descriptors)
 
 
     vFeatures = np.asarray(vFeatures)  # [n_imgs, n_vPoints, 128]
@@ -138,7 +162,13 @@ def bow_histogram(vFeatures, vCenters):
     histo = None
 
     # todo
-    ...
+    # To compute the histogram to be returned, assign the descriptors to
+    # the cluster centers and count how many descriptors are assigned to each cluster
+    idx, _ = findnn(vFeatures, vCenters)
+    values, counts = np.unique(idx, return_counts=True)
+
+    histo = np.zeros(vCenters.shape[0])
+    histo[values] = counts
 
     return histo
 
@@ -169,7 +199,10 @@ def create_bow_histograms(nameDir, vCenters):
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # [h, w]
 
         # todo
-        ...
+        vPoints = grid_points(img, nPointsX, nPointsY, border)
+        descriptors = descriptors_hog(img, vPoints, cellWidth, cellHeight)
+        bowHist = bow_histogram(descriptors, vCenters)
+        vBoW.append(bowHist)
 
 
     vBoW = np.asarray(vBoW)  # [n_imgs, k]
@@ -189,7 +222,8 @@ def bow_recognition_nearest(histogram,vBoWPos,vBoWNeg):
 
     # Find the nearest neighbor in the positive and negative sets and decide based on this neighbor
     # todo
-    ...
+    _, DistPos = findnn(histogram, vBoWPos)
+    _, DistNeg = findnn(histogram, vBoWNeg)
 
     if (DistPos < DistNeg):
         sLabel = 1
@@ -208,8 +242,8 @@ if __name__ == '__main__':
     nameDirNeg_test = 'data/data_bow/cars-testing-neg'
 
 
-    k = None  # todo
-    numiter = None  # todo
+    k = 40  # todo
+    numiter = 15  # todo
 
     print('creating codebook ...')
     vCenters = create_codebook(nameDirPos_train, nameDirNeg_train, k, numiter)

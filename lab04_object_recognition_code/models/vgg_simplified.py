@@ -31,7 +31,39 @@ class Vgg(nn.Module):
         # #     ...)
         # for all conv layers, set: kernel=3, padding=1
 
-        ...
+        self.conv_block1 = nn.Sequential(
+            nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.conv_block2 = nn.Sequential(
+            nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.conv_block3 = nn.Sequential(
+            nn.Conv2d(in_channels=128, out_channels=256, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.conv_block4 = nn.Sequential(
+            nn.Conv2d(in_channels=256, out_channels=fc_layer, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.conv_block5 = nn.Sequential(
+            nn.Conv2d(in_channels=fc_layer, out_channels=fc_layer, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(in_features=fc_layer, out_features=256),
+            nn.ReLU(),
+            nn.Dropout2d(),
+            nn.Linear(in_features=256, out_features=classes)
+        )
+
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -47,7 +79,20 @@ class Vgg(nn.Module):
         """
         score = None
         # todo
-        ...
+        score = self.conv_block1(x)
+        score = self.conv_block2(score)
+        score = self.conv_block3(score)
+        score = self.conv_block4(score)
+        score = self.conv_block5(score)
+        score = self.classifier(score)
 
         return score
 
+
+# Debug
+if __name__ == "__main__":
+    vgg = Vgg()
+    print(vgg)
+    x = torch.rand(1,3,32,32)
+    y = vgg.forward(x)
+    print(y)
