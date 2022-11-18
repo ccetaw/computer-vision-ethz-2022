@@ -38,6 +38,7 @@ def train(train_loader, model, criterion, optimizer, epoch,
 
     end = time.time()
     for i, (input, target) in enumerate(train_loader):
+        device = torch.device("cuda" if args.gpu else "cpu")
         if len(input.shape) > 4:
             # Note that in the MNIST dataloader, we return 3-dimentional tensor before we make the batch,
             # thus the batch of images returned from the dataloader would be 1 x B x 3 x H x W. Same applies
@@ -49,10 +50,11 @@ def train(train_loader, model, criterion, optimizer, epoch,
         data_time.update(time.time() - end)
 
         # compute output
+        target = target.to(device)
+        input = input.to(device)
         output = model(input)
 
         # compute loss
-        target = target.to(output.device)
         loss = criterion(output, target)
 
         # compute gradient and do update step
@@ -102,6 +104,7 @@ def validate(val_loader, val_dataset, model, criterion,
         perf_indicator (float): performance indicator. In the case of image segmentation, we return
                                 mean IoU over all validation images.
     """
+    device = torch.device("cuda" if args.gpu else "cpu")
     batch_time = AverageMeter()
     losses = AverageMeter()
 
@@ -122,10 +125,11 @@ def validate(val_loader, val_dataset, model, criterion,
                 target = target.view(target.shape[0] * target.shape[1], target.shape[2], target.shape[3])
 
             # compute output
+            target = target.to(device)
+            input = input.to(device)
             output = model(input)
 
             # compute loss
-            target = target.to(output.device)
             loss = criterion(output, target)
 
             # Upsample output, if it has different resolution to target
