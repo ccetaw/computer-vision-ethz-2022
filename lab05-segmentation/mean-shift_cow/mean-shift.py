@@ -64,8 +64,8 @@ def meanshift_step_batch(X, bandwidth=2.5):
 def meanshift(X):
     X = X.clone()
     for _ in tqdm(range(20)):
-        X = meanshift_step(X)   # slow implementation
-        # X = meanshift_step_batch(X)   # fast implementation
+        # X = meanshift_step(X)   # slow implementation
+        X = meanshift_step_batch(X)   # fast implementation
     return X
 
 scale = 0.25    # downscale the image to run faster
