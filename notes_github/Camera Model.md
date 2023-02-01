@@ -94,11 +94,11 @@ $$
    
     where $\mathbf{K}$ is an upper triangular camera calibration matrix of the form:
     
-    $$K = \begin{bmatrix}\alpha_{u} & s & u_{0} \\
-    \quad & \alpha_{v} & v_{0} \\
-    \quad & \quad & 1\end{bmatrix}$$
+ $$K = \begin{bmatrix}\alpha_{u} & s & u_{0} \\
+ \quad & \alpha_{v} & v_{0} \\
+ \quad & \quad & 1\end{bmatrix}$$
     
-    and $\alpha_{u}$ and $\alpha_{v}$ are scale factors, $s$ is *skewness*, and $\mathbf{u}_{0} = [u_{0},v_{0}]^{\top}$ is the principal point. These are camera intrinsic parameters. Usually, pixels are assumed to be square in which case $\alpha_{u}=\alpha_{v}=\alpha$ and $s=0$. Hence, $\alpha$ can be considered to be the focal length of the lens expressed in units of the pixel dimension. We often say that an image is *skewed* when the camera coordinate system is skewed, meaning that the angle between the two axes is slightly larger or smaller than 90 degrees. Most cameras have zero-skew, but some degree of skewness may occur because of sensor manufacturing errors. 
+    and $\alpha\_{u}$ and $\alpha\_{v}$ are scale factors, $s$ is *skewness*, and $\mathbf{u}\_{0} = [u\_{0},v\_{0}]^{\top}$ is the principal point. These are camera intrinsic parameters. Usually, pixels are assumed to be square in which case $\alpha_{u}=\alpha_{v}=\alpha$ and $s=0$. Hence, $\alpha$ can be considered to be the focal length of the lens expressed in units of the pixel dimension. We often say that an image is *skewed* when the camera coordinate system is skewed, meaning that the angle between the two axes is slightly larger or smaller than 90 degrees. Most cameras have zero-skew, but some degree of skewness may occur because of sensor manufacturing errors. 
 
 It's convenient to combine theses three components into a single linear transformation. Using homogeneous coordinates, a 3D point $\tilde{\mathbf{X}}$ is related to its pixel position $\tilde{\mathbf{u}}$ in a 2D image array by the following relationship:
 
@@ -125,7 +125,7 @@ $$
 \end{bmatrix}
 $$
 
-Then $\tilde{\mathbf{u}}_{i} \sim \mathbf{P}\tilde{\mathbf{X}}_{i}$ could be written as
+Then $\tilde{\mathbf{u}}\_{i} \sim \mathbf{P}\tilde{\mathbf{X}}\_{i}$ could be written as
 
 $$
 \begin{pmatrix}
@@ -307,10 +307,10 @@ $$
 
 > **Gold Standard Algorithm**
 > **Objective**:
-> 	Given $n≥6$ 2D to 3D point correspondences $\{ \mathbf{X}_{i}\leftrightarrow \mathbf{x}_{i}\}$, determine the Maximum Likelihood Estimation of $P$
+> 	Given $n≥6$ 2D to 3D point correspondences $\{ \mathbf{X}\_{i}\leftrightarrow \mathbf{x}\_{i}\}$, determine the Maximum Likelihood Estimation of $P$
 > **Algorithm**:
 > 	1. Linear solution
-> 		a. Normalization: $\tilde{\mathbf{X}}_{i} = U\mathbf{X}_{I}$, $\tilde{\mathbf{x}}_{i} = T\mathbf{x}_{i}$
+> 		a. Normalization: $\tilde{\mathbf{X}}\_{i} = U\mathbf{X}\_{I}$, $\tilde{\mathbf{x}}\_{i} = T\mathbf{x}\_{i}$
 > 		b. DLT
 > 	2. Minimization of geometric error: using the linear estimate as a starting point minimize the geometric error. 
 > 	
