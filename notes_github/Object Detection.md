@@ -37,7 +37,7 @@ $$
 
 Compute sum within a rectangle
 
-| ![120](OR_8.png%5C) | ![120](OR_9.png%5C) | ![120](OR_10.png%5C) | ![120](OR_11.png%5C) | ![120](OR_13.png%5C) |
+| ![120](attachments/OR_8.png) | ![120](attachments/OR_9.png) | ![120](attachments/OR_10.png) | ![120](attachments/OR_11.png) | ![120](attachments/OR_13.png) |
 | ------------------ | ------------------ | ------------------- | ------------------- | ------------------- |
 | $R = A - B - C +D$ | $A$                | $B$                 | $C$                 | $D$                 | 
 
@@ -61,7 +61,8 @@ $$
 > - Choose $\alpha_t=\frac{1}{2} \ln \left(\frac{1-\epsilon_t}{\epsilon_t}\right)$.
 > - Update:
 > 
-> $$\begin{aligned}D_{t+1}(i) & =\frac{D_t(i)}{Z_t} \times \begin{cases}e^{-\alpha_t} & \text { if } h_t\left(x_i\right)=y_i \\e^{\alpha_t} & \text { if } h_t\left(x_i\right) \neq y_i\end{cases} \\& =\frac{D_t(i) \exp \left(-\alpha_t y_i h_t\left(x_i\right)\right)}{Z_t}\end{aligned}$$
+> $$\begin{aligned}D_{t+1}(i) & =\frac{D_t(i)}{Z_t} \times \begin{cases}e^{-\alpha_t} & \text { if } h_t\left(x_i\right)=y_i \\e
+^{\alpha_t} & \text { if } h_t\left(x_i\right) \neq y_i\end{cases} \\& =\frac{D_t(i) \exp \left(-\alpha_t y_i h_t\left(x_i\right)\right)}{Z_t}\end{aligned}$$
 > 
 > where $Z_t$ is a normalization factor (chosen so that $D_{t+1}$ will be a distribution).
 > 

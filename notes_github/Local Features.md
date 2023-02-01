@@ -46,7 +46,7 @@ Shifting the patch a bit should make a big difference in terms of the underlying
 Three cases are showed below
 | Flat                           | Edge                               | Corner                               |
 | ------------------------------ | ---------------------------------- | ------------------------------------ |
-| ![200](Local%20Features-1.png%5C) | ![200](Local%20Features-2.png%5C)     | ![200](Local%20Features-3.png%5C)       |
+| ![200](Local%20Features-1.png) | ![200](Local%20Features-2.png)     | ![200](Local%20Features-3.png)       |
 | no change in all directions    | no change along the edge direction | significant change in all directions | 
 
 By the comparison above we know that corner detection could effectively be keypoint detection. 
@@ -82,8 +82,7 @@ I_{y}I_{x} & I_{y}^{2}
 \begin{bmatrix}
 u \\
 v
-\end{bmatrix}
-= 
+\end{bmatrix}= 
 \begin{bmatrix}
 u & v
 \end{bmatrix}
@@ -143,7 +142,7 @@ To measure this property, ==we need a function that has large value when both ei
 
 | Kanade & Tomasi | Harris & Stephens              | Nobel |
 | --------------- | ------------------------------ | ----- |
-| ![200](Local%20Features-7.png%5C)                | ![200](Local%20Features-5.png%5C) | ![200](Local%20Features-6.png%5C)      |
+| ![200](attachments/Local%20Features-7.png)                | ![200](attachments/Local%20Features-5.png) | ![200](attachments/Local%20Features-6.png)      |
 
 Choices of window function $w(x,y)$:
 - uniform window
