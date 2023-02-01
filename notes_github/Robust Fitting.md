@@ -32,7 +32,7 @@ RANSAC is an iterative method for estimating the parameters of a mathematical mo
 >1. Estimate the model parameters $\alpha_{\text{tmp}}$ from a randomly sampled subset of $s$ data points from $S$
 >2. Determine the set of inliers $S_{\text{tmp}}\subseteq S$ to be the data points within a distance $t$ of the model
 >3. If this set of inliers is the largest so far, let $S_{\text{IN}} = S_{\text{tmp}}$ and let $\alpha=\alpha_{\text{tmp}}$
->4. If $|S_{\text{IN}}|<T$, where $T$ is some threshold value, repeat steps 1-3. otherwise stop
+>4. If $S_{\text{IN}}|\<T$, where $T$ is some threshold value, repeat steps 1-3. otherwise stop
 >5. After $n$ trials, stop
 
 ### Analysis
@@ -59,11 +59,11 @@ $$
 >**Objective**:
 >To robustly fit a model $y = f(x, \alpha)$ to a data set $S$ containing outliers
 >**Algorithm**:
->1. Let $n = \infty$, $S_{\text{IN}} = \emptyset$ and $\#\text{iterations} = 0$.
->2. While $n > \#\text{iterations}$, repeat 3-5.
+>1. Let $n = \infty$, $S_{\text{IN}} = \emptyset$ and $\sharp\text{iterations} = 0$.
+>2. While $n > \sharp\text{iterations}$, repeat 3-5.
 >3. Estimate parameters $\alpha_{\text{tmp}}$ from a random $s$-tuple from $S$.
 >4. Determine inlier set $S_{\text{tmp}}$, i.e. data points within a distance $t$ of the model $y = f(x,\alpha)$.
->5. If $|S_{\text{tmp}}|>|S_{\text{IN}}|$, set $S_{\text{IN}} = S_{\text{tmp}}$, $\alpha = \alpha_{\text{tmp}}$, $\epsilon = \frac{|S_{\text{IN}}|}{|S_{\text{tmp}}|}$ and $\frac{\log(1-p)}{\log(1-\epsilon^{s})}$ with $p=0.99$ or higher. Increase $\#\text{iterations}$ by $1$.
+>5. If $|S_{\text{tmp}}|>|S_{\text{IN}}|$, set $S_{\text{IN}} = S_{\text{tmp}}$, $\alpha = \alpha_{\text{tmp}}$, $\epsilon = \frac{|S_{\text{IN}}|}{|S_{\text{tmp}}|}$ and $\frac{\log(1-p)}{\log(1-\epsilon^{s})}$ with $p=0.99$ or higher. Increase $\sharp\text{iterations}$ by $1$.
 
 
 ### Example
@@ -75,7 +75,7 @@ To estimate the circle using RANSAC, we need two things:
 	- The smallest number of points required to determine a circle is $3$, i.e. $s=3$, and the algorithm for computing the circle is quite simple.  ![Outlier Elimination-2](attachments/Outlier%20Elimination-2.png)
 - A way to determine which of the points are inliers for an estimated circle. 
 	- The distance from a point $(x_{i},y_{i})$ to a circle $(x-x_{0})^{2}+(y-y_{0})^{2} = r^{2}$ is given by $|\sqrt{ (x_{i}-x_{0})^{2}+(y_{i}-y_{0})^{2} }-r|$
-	- So for a threshold value $t$, we say that $(x_{i},y_{i})$ is an inlier if $|\sqrt{ (x_{i}-x_{0})^{2}+(y_{i}-y_{0})^{2} }-r|<t$
+	- So for a threshold value $t$, we say that $(x_{i},y_{i})$ is an inlier if $|\sqrt{ (x_{i}-x_{0})^{2}+(y_{i}-y_{0})^{2} }-r|\<t$
 
 The RANSAC algorithm evaluates many different circles and returns the circle with the largest inlier set
 ![400](attachments/Outlier%20Elimination-3.png)

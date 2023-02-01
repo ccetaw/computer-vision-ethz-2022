@@ -263,9 +263,11 @@ The line $L$ tangent to $\mathbf{C}$ at point $\mathbf{x}$ on $\mathbf{C}$ is gi
 > Thus $L$ goes through $\mathbf{x}$ and is tangent to $\mathbf{C}$
 
 The set of lines $L$ tangent to $\mathbf{C}$ satisfies the equation
+
 $$
 L^{\top} \mathbf{C}^{\*} L = 0
 $$
+
 In general $\mathbf{C}^{\*} = \mathbf{C}^{-1}$. 
 
 > **Proof**:
