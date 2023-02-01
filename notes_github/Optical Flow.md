@@ -45,10 +45,12 @@ $$
 
 >**Proof**:
 >Taylor expansion
+
 >$$\begin{align} I(x + \delta x, y + \delta y, t+\delta t )  & = I(x,y,t)+ \frac{ \partial I }{ \partial x } \delta t+\frac{ \partial I }{ \partial y } \delta y+\frac{ \partial I }{ \partial t } \delta t  \\ 
 & = I(x,y,t) \\ 
 \implies \frac{ \partial I }{ \partial x } \delta t+\frac{ \partial I }{ \partial y } \delta y+\frac{ \partial I }{ \partial t } \delta t & =0 \quad \text{divide by } \delta t \\ 
 \implies \frac{ \partial I }{ \partial x } \frac{ dx }{ dt } +\frac{ \partial I }{ \partial y } \frac{ dy }{ dt } +\frac{ \partial I }{ \partial t }   & = 0 \end{align}$$
+
 > Equivalently written as
 > $$I\_{x}u+I\_{y}v+I\_{t} = 0$$
 > and the vector form is 
