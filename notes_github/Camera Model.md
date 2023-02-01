@@ -46,7 +46,7 @@ $$
 ### The Projective Matrix
 ![Camera Model](attachments/Camera%20Model.png)
 The relationship between a 3D point and its corresponding 2D image point has three components, which are described below:
-1. The first component is the rigid body transformation that relates points $\tilde{\mathbf{X}} \sim [X, Y, Z, 1]^{\top}$ in the world coordinate system to points $\tilde{\mathbf{X}}_{c}\sim[X_{c},Y_{c},Z_{c},1]^{\top}$ in the camera coordinate system:
+1. The first component is the rigid body transformation that relates points $\tilde{\mathbf{X}} \sim [X, Y, Z, 1]^{\top}$ in the world coordinate system to points $\tilde{\mathbf{X}}\_{c}\sim[X\_{c},Y\_{c},Z\_{c},1]^{\top}$ in the camera coordinate system:
 
 $$
 \left[\begin{array}{c}
@@ -88,17 +88,17 @@ Z_{\mathrm{c}} \\
 \end{array}\right] .
 $$
 
-1. The final component is the 2D to 2D transformation that relates points $\tilde{\mathbf{x}}$ on the camera image plane to pixel coordinates $\tilde{\mathbf{u}}= [u,v,1]^{\top}$ . This is written as follows 
+3. The final component is the 2D to 2D transformation that relates points $\tilde{\mathbf{x}}$ on the camera image plane to pixel coordinates $\tilde{\mathbf{u}}= [u,v,1]^{\top}$ . This is written as follows 
    
-   $$\tilde{\mathbf{u}} = \mathbf{K}\tilde{\mathbf{x}}$$
-   
-    where $\mathbf{K}$ is an upper triangular camera calibration matrix of the form:
-    
- $$K = \begin{bmatrix}\alpha_{u} & s & u_{0} \\
- \quad & \alpha_{v} & v_{0} \\
- \quad & \quad & 1\end{bmatrix}$$
-    
- and $\alpha\_{u}$ and $\alpha\_{v}$ are scale factors, $s$ is *skewness*, and $\mathbf{u}\_{0} = [u\_{0},v\_{0}]^{\top}$ is the principal point. These are camera intrinsic parameters. Usually, pixels are assumed to be square in which case $\alpha_{u}=\alpha_{v}=\alpha$ and $s=0$. Hence, $\alpha$ can be considered to be the focal length of the lens expressed in units of the pixel dimension. We often say that an image is *skewed* when the camera coordinate system is skewed, meaning that the angle between the two axes is slightly larger or smaller than 90 degrees. Most cameras have zero-skew, but some degree of skewness may occur because of sensor manufacturing errors. 
+$$\tilde{\mathbf{u}} = \mathbf{K}\tilde{\mathbf{x}}$$
+
+where $\mathbf{K}$ is an upper triangular camera calibration matrix of the form:
+
+$$K = \begin{bmatrix}\alpha_{u} & s & u_{0} \\
+\quad & \alpha_{v} & v_{0} \\
+\quad & \quad & 1\end{bmatrix}$$
+
+and $\alpha\_{u}$ and $\alpha\_{v}$ are scale factors, $s$ is *skewness*, and $\mathbf{u}\_{0} = [u\_{0},v\_{0}]^{\top}$ is the principal point. These are camera intrinsic parameters. Usually, pixels are assumed to be square in which case $\alpha_{u}=\alpha_{v}=\alpha$ and $s=0$. Hence, $\alpha$ can be considered to be the focal length of the lens expressed in units of the pixel dimension. We often say that an image is *skewed* when the camera coordinate system is skewed, meaning that the angle between the two axes is slightly larger or smaller than 90 degrees. Most cameras have zero-skew, but some degree of skewness may occur because of sensor manufacturing errors. 
 
 It's convenient to combine theses three components into a single linear transformation. Using homogeneous coordinates, a 3D point $\tilde{\mathbf{X}}$ is related to its pixel position $\tilde{\mathbf{u}}$ in a 2D image array by the following relationship:
 

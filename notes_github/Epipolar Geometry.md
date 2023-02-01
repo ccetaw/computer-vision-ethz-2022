@@ -13,7 +13,7 @@ Having knowledge of geometry when multiple cameras are present can be extremely 
 ## Setup
 ![Epipolar Geometry-1](attachments/Epipolar%20Geometry-1.png)
 
-The standard epipolar geometry setup involves two cameras observing the same 3D point $\mathbf{X}$, whose projection in each of the image planes is located at $\tilde{\mathbf{x}}$ and $\tilde{\mathbf{x}}'$ respectively. The camera centers are located at $C_{1}$ and $C'$, and the line between them is referred to as the *baseline*. We call the plane defined by the two camera centers and $\mathbf{X}$ the *epipolar plane*. The locations of where the baseline intersects the two image planes are known as the *epipoles* $\tilde{\mathbf{e}}$ and $\tilde{\mathbf{e}}'$. Finally, the lines defined by the intersection of the epipolar plane and the two image planes are known as the *epipolar lines*. The epipolar lines have the property that they intersect the baseline at the respective epipoles in the image plane.
+The standard epipolar geometry setup involves two cameras observing the same 3D point $\mathbf{X}$, whose projection in each of the image planes is located at $\tilde{\mathbf{x}}$ and $\tilde{\mathbf{x}}'$ respectively. The camera centers are located at $C\_{1}$ and $C'$, and the line between them is referred to as the *baseline*. We call the plane defined by the two camera centers and $\mathbf{X}$ the *epipolar plane*. The locations of where the baseline intersects the two image planes are known as the *epipoles* $\tilde{\mathbf{e}}$ and $\tilde{\mathbf{e}}'$. Finally, the lines defined by the intersection of the epipolar plane and the two image planes are known as the *epipolar lines*. The epipolar lines have the property that they intersect the baseline at the respective epipoles in the image plane.
 
 ## The Essential Matrix
 Given the projection of a 3D point in one image, its projection in a second image is restricted to the corresponding epipolar line. The epipolar constraint can be formulated algebraically using the essential matrix $\mathbf{E}$, which relates corresponding image points in two views. Consider two pinhole cameras with projection matrices $\mathbf{P}$ and $\mathbf{P}'$. Given a Euclidean point $\mathbf{X}'$ in the coordinate system of camera $C'$, and its position $\mathbf{X}$ in the coordinate system of $C$ is given by:
@@ -22,20 +22,20 @@ $$
 \mathbf{X} = \mathbf{R}\mathbf{X}' + \mathbf{T}
 $$
 
-where $\mathbf{R}$ is a $3\times 3$ rotation matrix and $\mathbf{T}$ is a $3$-vector. Pre-multiplying both sides by $\mathbf{X}^{\top}[\mathbf{T}]_{\times}$ gives:
+where $\mathbf{R}$ is a $3\times 3$ rotation matrix and $\mathbf{T}$ is a $3$-vector. Pre-multiplying both sides by $\mathbf{X}^{\top}[\mathbf{T}]\_{\times}$ gives:
 
 $$
-\mathbf{X}^{\top}[\mathbf{T}]_{\times} \mathbf{R} \mathbf{X}^{\prime}=\mathbf{X}^{\top} \mathbf{E} \mathbf{X}^{\prime}=0
+\mathbf{X}^{\top}[\mathbf{T}]\_{\times} \mathbf{R} \mathbf{X}^{\prime}=\mathbf{X}^{\top} \mathbf{E} \mathbf{X}^{\prime}=0
 \tag{*}
 $$
 
-where $3\times 3$ *essential matrix* $\mathbf{E}\sim[\mathbf{T}]_{\times}\mathbf{R}$ and $[\mathbf{T}]_{\times}$ is the cross product matrix. For $\mathbf{T} = [t_{x},t_{y},t_{z}]^{\top}$
+where $3\times 3$ *essential matrix* $\mathbf{E}\sim[\mathbf{T}]\_{\times}\mathbf{R}$ and $[\mathbf{T}]\_{\times}$ is the cross product matrix. For $\mathbf{T} = [t\_{x},t\_{y},t\_{z}]^{\top}$
 
 $$
-[\mathbf{T}]_{\times} = \begin{bmatrix}
-0 & -t_{z} & t_{y} \\
-t_{z} & 0 & -t_{x} \\
--t_{y} & t_{x} & 0
+[\mathbf{T}]\_{\times} = \begin{bmatrix}
+0 & -t\_{z} & t\_{y} \\
+t\_{z} & 0 & -t\_{x} \\
+-t\_{y} & t\_{x} & 0
 \end{bmatrix}
 $$
 
@@ -71,15 +71,15 @@ where $\mathbf{F}\sim \mathbf{K}^{-\top}\mathbf{E}\mathbf{K}'^{-1}$ is the *fund
 ### Estimating the Fundamental Matrix
 It is possible to estimate the fundamental matrix given two images of the same scene and *without knowing the extrinsic or intrinsic parameters of the camera*. The method we discuss for doing so is known as the **Eight-Point Algorithm**.
 ![Epipolar Geometry](attachments/Epipolar%20Geometry.png)
-Each point correspondence, $\tilde{\mathbf{u}}_{i}\sim[u_{i}, v_{i},1]^{\top}$ and $\tilde{\mathbf{u}}_{i}'\sim[u_{i}',v_{i}',1]^{\top}$, generates one constraint on the elements of the fundamental matrix $\mathbf{F}$:
+Each point correspondence, $\tilde{\mathbf{u}}\_{i}\sim[u\_{i}, v\_{i},1]^{\top}$ and $\tilde{\mathbf{u}}\_{i}'\sim[u\_{i}',v\_{i}',1]^{\top}$, generates one constraint on the elements of the fundamental matrix $\mathbf{F}$:
 
 $$
 \left[\begin{array}{lll}
 u_i^{\prime} & v_i^{\prime} & 1
 \end{array}\right]\left[\begin{array}{lll}
-f_{11} & f_{12} & f_{13} \\
-f_{21} & f_{22} & f_{23} \\
-f_{31} & f_{32} & f_{33}
+f\_{11} & f\_{12} & f\_{13} \\
+f\_{21} & f\_{22} & f\_{23} \\
+f\_{31} & f\_{32} & f\_{33}
 \end{array}\right]\left[\begin{array}{c}
 u_i \\
 v_i \\
@@ -91,12 +91,12 @@ Rearrange it:
 
 $$
 \begin{pmatrix}
-u_{i}'\tilde{\mathbf{u}}_{i}^{\top} & v_{i}'\tilde{\mathbf{u}}_{i}^{\top} & \tilde{\mathbf{u}_{i}}^{\top}
+u\_{i}'\tilde{\mathbf{u}}\_{i}^{\top} & v\_{i}'\tilde{\mathbf{u}}\_{i}^{\top} & \tilde{\mathbf{u}\_{i}}^{\top}
 \end{pmatrix}
 \begin{pmatrix}
-\mathbf{f}_{1} \\
-\mathbf{f}_{2} \\
-\mathbf{f}_{3}
+\mathbf{f}\_{1} \\
+\mathbf{f}\_{2} \\
+\mathbf{f}\_{3}
 \end{pmatrix}
 = \mathbf{0}
 $$
@@ -109,15 +109,15 @@ u_1^{\prime} u_1 & u_1^{\prime} v_1 & u_1^{\prime} & v_1^{\prime} u_1 & v_1^{\pr
 \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
 u_n^{\prime} u_n & u_n^{\prime} v_n & u_1^{\prime} & v_n^{\prime} u_n & v_n^{\prime} v_n & v_n^{\prime} & u_n & v_n & 1
 \end{array}\right]\left[\begin{array}{c}
-f_{11} \\
-f_{12} \\
-f_{13} \\
-f_{21} \\
-f_{22} \\
-f_{23} \\
-f_{31} \\
-f_{32} \\
-f_{33}
+f\_{11} \\
+f\_{12} \\
+f\_{13} \\
+f\_{21} \\
+f\_{22} \\
+f\_{23} \\
+f\_{31} \\
+f\_{32} \\
+f\_{33}
 \end{array}\right]=\mathbf{0}
 $$
 
@@ -127,12 +127,12 @@ $$
 \mathbf{A}\mathbf{f} = 0
 $$
 
-where $\mathbf{A}$ is an $n\times 9$ measurement matrix, and $\mathbf{f}$ represents the elements of the fundamental matrix $f_{ij}$ as a $9$-vector. Given $8$ or more correspondences a least squares solution can be found as the unit eigenvector (f is defined up to an arbitrary scale) corresponding to the minimum eigenvalue of $\mathbf{A}^{\top}\mathbf{A}$.
+where $\mathbf{A}$ is an $n\times 9$ measurement matrix, and $\mathbf{f}$ represents the elements of the fundamental matrix $f\_{ij}$ as a $9$-vector. Given $8$ or more correspondences a least squares solution can be found as the unit eigenvector (f is defined up to an arbitrary scale) corresponding to the minimum eigenvalue of $\mathbf{A}^{\top}\mathbf{A}$.
 
 Note that the fundamental matrix has only $7$ degrees of freedom since its determinant must be zero. A non-unique solution can be obtained from only $7$ point correspondences.
 
 ### The Normalized Eight-Point Algorithm
-The main problem of the standard Eight-Point Algorithm stems from the fact that $\mathbf{A}$ is ill-conditioned for SVD. For SVD to work properly, $\mathbf{A}$ should have one singular value equal to (or near) zero, with other singular values being nonzero. However, the  correspondences $\tilde{\mathbf{u}}_{i}$ will often have extremely large values in the first and second coordinates due to the pixel range of a modern camera (i.e. $\tilde{\mathbf{u}}_{i} = (1832,1023,1)$). 
+The main problem of the standard Eight-Point Algorithm stems from the fact that $\mathbf{A}$ is ill-conditioned for SVD. For SVD to work properly, $\mathbf{A}$ should have one singular value equal to (or near) zero, with other singular values being nonzero. However, the  correspondences $\tilde{\mathbf{u}}\_{i}$ will often have extremely large values in the first and second coordinates due to the pixel range of a modern camera (i.e. $\tilde{\mathbf{u}}\_{i} = (1832,1023,1)$). 
 
 To solve this problem, we will normalize the points in the image before constructing $\mathbf{A}$. This means we pre-condition $\mathbf{A}$ by applying both a translation and scaling on the image coordinates such that two requirements are satisfied:
 - the origin of the new coordinate system should be located at the centroid of the image points (translation).
@@ -141,15 +141,15 @@ To solve this problem, we will normalize the points in the image before construc
 We can compactly represent this process by transformation matrices $H$, $H'$ that translate by the centroid and scale by the scaling factor
 
 $$
-\sqrt{ \frac{2N}{\sum_{i=1}^{N}\|\mathbf{u}_{i} - \overline{\mathbf{u}}\|^{2}} }
+\sqrt{ \frac{2N}{\sum\_{i=1}^{N}\|\mathbf{u}\_{i} - \overline{\mathbf{u}}\|^{2}} }
 $$
 
 for each image.
 
-Using the new, normalized coordinates, we can compute the new $\mathbf{F}_{n}$ using the regular least-squares Eight Point Algorithm. And after denormalization, we have
+Using the new, normalized coordinates, we can compute the new $\mathbf{F}\_{n}$ using the regular least-squares Eight Point Algorithm. And after denormalization, we have
 
 $$
-\mathbf{F} = H^{\top}\mathbf{F}_{n}H'
+\mathbf{F} = H^{\top}\mathbf{F}\_{n}H'
 $$
 
 
@@ -163,7 +163,7 @@ $$
 and decompose this matrix into a skew-symmetric matrix corresponding to translation and an orthonormal matrix corresponding to the rotation between the views;
 
 $$
-\mathbf{E}\sim[\mathbf{T}]_{\times}\mathbf{R}
+\mathbf{E}\sim[\mathbf{T}]\_{\times}\mathbf{R}
 $$
 
 The latter is in fact only possible if the essential matrix has rank 2 and two equal singular values.
@@ -174,12 +174,12 @@ $$
 \mathbf{E} = \mathbf{U}\Lambda \mathbf{V}^{\top}
 $$
 
-where $\Lambda = \text{diag}(\sigma_{1},\sigma_{2},\sigma_{3})$ and the matrices $\mathbf{U}$ and $\mathbf{V}$ are orthogonal. The decomposition into a translation vector and the rotation between the two views requires that $\sigma_{1}=\sigma_{2}\ne 0$ and $\sigma_{3}=0$. The nearest essential matrix (in the sense of minimizing the Frobenius norm between the two matrices) with the correct properties can be obtained by setting the two largest singular values to be equal to their average and the smallest one to zero.
+where $\Lambda = \text{diag}(\sigma\_{1},\sigma\_{2},\sigma\_{3})$ and the matrices $\mathbf{U}$ and $\mathbf{V}$ are orthogonal. The decomposition into a translation vector and the rotation between the two views requires that $\sigma\_{1}=\sigma\_{2}\ne 0$ and $\sigma\_{3}=0$. The nearest essential matrix (in the sense of minimizing the Frobenius norm between the two matrices) with the correct properties can be obtained by setting the two largest singular values to be equal to their average and the smallest one to zero.
 
 The translation and axis and angle of rotation can then be obtained directly up to arbitrary signs and unknown scale for the translation:
 
 $$
-[\mathbf{T}]_{\times}=\mathbf{U}\left[\begin{array}{ccc}
+[\mathbf{T}]\_{\times}=\mathbf{U}\left[\begin{array}{ccc}
 0 & 1 & 0 \\
 -1 & 0 & 0 \\
 0 & 0 & 0
