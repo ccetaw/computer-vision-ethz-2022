@@ -138,8 +138,8 @@ and $(\theta,\rho)$ is bounded.
 
 | Example        |                                    |
 | -------------- | ---------------------------------- |
-| Simple shapes   | ![600](Image%20Segmentation-2.png%5C) |
-| Complex scenes | ![600](Image%20Segmentation-3.png%5C) | 
+| Simple shapes   | ![600](Image%20Segmentation-2.png) |
+| Complex scenes | ![600](Image%20Segmentation-3.png) | 
 
 **Remarks**
 1. time consuming 
