@@ -39,7 +39,7 @@ The general idea is to represent a data item as a histogram over features.
 
 | Image/Object                       | Bag of Word                   |
 | ---------------------------------- | ----------------------------- |
-| ![300](Object%20Recognition-3.png%5C) | ![250](Object%20Recognition-4.png%5C) |
+| ![300](attachments/Object%20Recognition-3.png) | ![250](attachments/Object%20Recognition-4.png) |
 
 A not so crazy assumption here is:
 spatial information of local features can be ignored for object recognition (i.e., verification). 
@@ -49,9 +49,11 @@ spatial information of local features can be ignored for object recognition (i.e
 - Texture recognition: <br> ![400](attachments/OR_4.png)
 
 An image is a vector of counts over each feature
+
 $$
 \mathbf{v}_{d} = [n(w_{1}), n(w_{2}), \dots, n(w_{T})]
 $$
+
 where $n(\cdot)$ counts the number of occurrences, $d$ is the index of the image, $T$ is the number of features and $w_{i}$ is the word . $\mathbf{v}_{d}$ is essentially a histogram over words.
 
 **[tf–idf - Wikipedia](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)(Term Frequency - Inverse Document Frequency)**
@@ -79,7 +81,7 @@ $$
 where 
 
 $$
-\alpha_{i} = \log \left\{  \frac{D}{\sum_{d'}\mathbb{1}\{ w_{i}\in d' \}}  \right\}
+\alpha_{i} = \log \left( \frac{D}{\sum_{d'}\mathbb{1}\{ w_{i}\in d' \}}  \right)
 $$
 
 is the inverse document frequency, and $D$ is the total number of images. 
@@ -152,9 +154,9 @@ The method requires sparsity. If most images contain most words, then we are not
 
 **Score the Result**
 
-| ![200](Object%20Recognition-11.png%5C) | Precision                               | Recall                                                                         |
+| ![200](attachments/Object%20Recognition-11.png) | Precision                               | Recall                                                                         |
 | ----------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------ |
-| Figure                              | ![150](Object%20Recognition-12.png%5C)     | ![150](Object%20Recognition-13.png%5C)                                            |
+| Figure                              | ![150](attachments/Object%20Recognition-12.png)     | ![150](attachments/Object%20Recognition-13.png)                                            |
 | Formula                             | $$\text{Precision} = \frac{tp}{tp+fp}$$ | $$\text{Recall} = \frac{tp}{tp+fn} = \frac{\text{relevant}}{\text{returned}}$$ |
 
 - True positive ($tp$)  -> correct attribution 

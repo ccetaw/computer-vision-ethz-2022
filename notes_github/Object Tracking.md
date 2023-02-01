@@ -132,7 +132,7 @@ If an object is in the detection database, we could detect it in each frame inde
 The idea is, we train an object-background classifier in the fly, i.e. update the classifier every frame. 
 | Frame $t$                       | Frame $t+1$                |
 | ------------------------------- | -------------------------- |
-| ![200](Object%20Tracking-8.png%5C) | ![400](Object%20Tracking-9.png%5C) |
+| ![200](attachments/Object%20Tracking-8.png) | ![400](attachments/Object%20Tracking-9.png) |
 
 The tracking loop is as follows
 ![Object Tracking](attachments/Object%20Tracking.png)
