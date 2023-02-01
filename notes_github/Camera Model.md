@@ -94,7 +94,9 @@ $$
    
     where $\mathbf{K}$ is an upper triangular camera calibration matrix of the form:
     
-    $$K = \begin{bmatrix}\alpha_{u} & s & u_{0} \\\quad & \alpha_{v} & v_{0} \\\quad & \quad & 1\end{bmatrix}$$
+    $$K = \begin{bmatrix}\alpha_{u} & s & u_{0} \\
+    \quad & \alpha_{v} & v_{0} \\
+    \quad & \quad & 1\end{bmatrix}$$
     
     and $\alpha_{u}$ and $\alpha_{v}$ are scale factors, $s$ is *skewness*, and $\mathbf{u}_{0} = [u_{0},v_{0}]^{\top}$ is the principal point. These are camera intrinsic parameters. Usually, pixels are assumed to be square in which case $\alpha_{u}=\alpha_{v}=\alpha$ and $s=0$. Hence, $\alpha$ can be considered to be the focal length of the lens expressed in units of the pixel dimension. We often say that an image is *skewed* when the camera coordinate system is skewed, meaning that the angle between the two axes is slightly larger or smaller than 90 degrees. Most cameras have zero-skew, but some degree of skewness may occur because of sensor manufacturing errors. 
 
@@ -153,8 +155,7 @@ $$
 \mathbf{p}_{2} \\
 \mathbf{p}_{3}
 \end{pmatrix}
-=
-\mathbf{0}_{12\times 1}
+=\mathbf{0}_{12\times 1}
 $$
 
 Denote 
@@ -166,7 +167,7 @@ A_{i} = \begin{pmatrix}
 \end{pmatrix}
 $$
 
-and stack $A_{i}$s together, we have a linear system:
+and stack $A_{i}$ s together, we have a linear system:
 
 $$
 \mathbf{A}\mathbf{p} = \mathbf{0}
@@ -230,7 +231,7 @@ Once the projection matrix has been estimated, the first $3 \times 3$ sub-matrix
 ## DLT
 The above method is equivalent to direct linear transformation.
 
-Given a set of correspondences $\{ \mathbf{X}_{i} \leftrightarrow \mathbf{x}_{i} \}$, we want to determine the projective matrix $P$. 
+Given a set of correspondences $\{ \mathbf{X}\_{i} \leftrightarrow \mathbf{x}\_{i} \}$, we want to determine the projective matrix $P$. 
 
 ![400](attachments/Projective%20Geometry-20.png)
 
